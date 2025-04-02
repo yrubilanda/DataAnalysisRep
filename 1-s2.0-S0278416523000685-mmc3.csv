@@ -1,0 +1,7 @@
+,Structure Area,Patio Group Area,Structure Area in Patio Group,Structure Volume,Patio Group Volume,Structure Volume in Patio Group
+Structure Area,NA,7.61E-06,1.47E-11,0,0.001411722,2.49E-08
+Patio Group Area,7.61E-06,NA,0,0.000673044,0,0
+Structure Area in Patio Group,1.47E-11,0,NA,4.86E-09,7.70E-14,0
+Structure Volume,0,0.000673044,4.86E-09,NA,3.49E-05,3.84E-12
+Patio Group Volume,0.001411722,0,7.70E-14,3.49E-05,NA,0
+Structure Volume in Patio Group,2.49E-08,0,0,3.84E-12,0,NA
