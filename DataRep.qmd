@@ -1,0 +1,106 @@
+---
+title: "Data Analysis"
+format: html
+---
+
+# Data Analysis Replication - Regional household variation and inequality across the Maya landscape
+
+## Goal of the Original Paper
+
+The main goal of Schroder et al. 2023 is to assess regional household variation and inequality across the Maya lowlands using a landscape-scale analysis. The authors apply Gini coefficients as a proxy to measure architectural differentiation—primarily household size—as an indicator of wealth inequality. Their study emphasizes the value and limitations of using lidar-derived data to interpret socio-economic patterns beyond elite centers.
+
+## Data Set Used 
+
+-   Lidar Data Source: NASA G-LiHT (Goddard's LiDAR, Hyperspectral, and Thermal Imager), collected over southeastern Mexico in 2013.
+
+-   Coverage: 1,118 km² across multiple flight transects (\~300m wide, totaling 3,200 km in length).
+
+-   Data Points: Annotated archaeological features (structures and patio groups) from 458 tiles.
+
+-   Variables Used: Structure footprint area, structure volume, patio group area/volume, environmental and cultural factors (e.g., rainfall, site proximity, terrace density).
+
+### Analyses Conducted 
+
+The authors performed:
+
+1.  Descriptive Statistics (e.g., structure size distributions, density, Gini coefficient ranges).
+
+2.  Visualizations including:
+
+-   Lorenz curves.
+
+-   Correlation matrices.
+
+-   Maps and density plots of structure and inequality distributions.
+
+3.  Inferential Analyses:
+
+-   Correlation testing between Gini coefficients and environmental variables (e.g., rainfall, proximity to sites).
+
+-   Evaluation of regional and physiographic variation in inequality levels.
+
+### Planned Replications
+
+Figure 4: Descriptive statistics – assessing how sample size affects the Gini coefficient and its confidence intervals.
+
+Figure 5: Visualization – map showing Gini coefficient distributions by tile.
+
+Figure 9: Inferential statistics – correlation matrix between Gini coefficients and environmental variables (e.g., distance to water, site proximity, rainfall).
+
+## Load Libraries
+
+```{r}
+library(tidyverse)
+#install.packages("DescTools")
+library(DescTools)
+library(ggplot2)
+#install.packages("ggcorrplot")
+library(ggcorrplot)
+#install.packages("sf")
+library(sf)
+#install.packages("ggmap")
+library(ggmap)
+library(readr)
+library(dplyr)
+```
+
+Load data
+
+Supplementary Data 1: Results of Gini analyses by G-LiHT tile
+Supplementary Data 2: Correlation coefficients for Figure 8
+Supplementary Data 3: P-values for Figure 8
+Supplementary Data 4: Correlation coefficients for Figure 9
+Supplementary Data 5: P-values for Figure 9
+Supplementary Data 6: Correlation coefficients and p-values for Figures 10 and 11
+
+```{r}
+mmc1 <- read_csv("1-s2.0-S0278416523000685-mmc1.csv", col_names = TRUE)
+mmc2 <- read_csv("1-s2.0-S0278416523000685-mmc2.csv", col_names = TRUE)
+mmc3 <- read_csv("1-s2.0-S0278416523000685-mmc3.csv", col_names = TRUE)
+mmc4 <- read_csv("1-s2.0-S0278416523000685-mmc4.csv", col_names = TRUE)
+mmc5 <- read_csv("1-s2.0-S0278416523000685-mmc5.csv", col_names = TRUE)
+mmc6 <- read_csv("1-s2.0-S0278416523000685-mmc6.csv", col_names = TRUE)
+```
+# Replication
+
+## Figure 4
+Fig. 4. Effect of sample size on a) difference between corrected and uncorrected
+Gini coefficients based on structure footprint area and b) upper and
+lower confidence intervals of Gini coefficients based on structure footprint area.
+
+To replicate figure 4 we need supplementary material 1 (mmc1)
+
+```{r}
+head(mmc1) #view first few rows of data
+```
+Prepare the data
+
+```{r}
+# Rename columns for clarity
+#df$Sample_Size <- df$`Sample Size Structure.x`
+df$Gini_Uncorrected <- df$`Gini Structure Area`
+df$Gini_Corrected <- df$`Corrected Gini Structure Area`
+
+# Calculate Gini difference
+df$Gini_Diff <- df$Gini_Corrected - df$Gini_Uncorrected
+```
